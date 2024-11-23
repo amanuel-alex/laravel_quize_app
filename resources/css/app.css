@@ -31,3 +31,15 @@ a:hover::before,
 a:hover::after {
     width: 100%;
 } */
+
+/* nav bar scroll behaviour */
+/* nav {
+   
+    @apply bg-slate-200 transition-all duration-300 ease-in-out;
+}
+
+nav.scrolled {
+    @apply bg-green-700 text-slate-200;
+    z-index: 100;
+    transition: background-color 3s ease, height 3s ease, padding 3s ease;
+} */

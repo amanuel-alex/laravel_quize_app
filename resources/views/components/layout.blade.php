@@ -9,10 +9,10 @@
     <title>{{ env('APP_NAME') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-slate-100 text-slate-900">
+<body class="bg-slate-400 text-slate-900 ">
 
-   <header class="bg-orange-50 shadow-lg">
-      <nav class="flex justify-between items-center w-[92%] mx-auto py-4 ">
+   <header class="bg-orange-50 shadow-lg fixed left-0 right-0  top-0 ">
+      <nav class=" flex justify-between items-center w-[92%] mx-auto py-4  ">
         {{-- <img src="{{ asset('img/logo4.png') }}" alt="logo" class="w-22 h-10">  --}}
         <h2 class="nav-link text-lg font-semibold">logo</h2>
         <div class="flex items-center gap-4">
@@ -43,7 +43,7 @@
 
 
        @guest
-       <div class="flex items-center gap-6">
+       <div class="flex items-center gap-6 ">
         <a href="{{route('login')}}" class="nav-link text-lg font-semibold hover:text-orange-300">Login</a>
         <a href="{{route('register')}}" class="nav-link text-lg font-semibold hover:text-orange-300 rounded">Register</a>
     </div>
@@ -51,13 +51,24 @@
       </nav>
    </header>
 
-   <main class="py-8 px-4 mx-auto max-w-screen-lg">
+   <main class="py-8 px-4 mx-auto my-20 max-w-screen-lg ">
      {{$slot}}
    </main>
 
    <footer>
      <h1 class="text-4xl ">Footer</h1>
    </footer>
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+   <script>
+   
+// $(window).scroll(function () {
+//     if ($(this).scrollTop() >30) {
+//         $("nav").addClass("scrolled");
+//     } else {
+//         $("nav").removeClass("scrolled");
+//     }
+// });
+   </script>
 </body>
 </html>

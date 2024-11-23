@@ -1,6 +1,6 @@
 <x-layout>
     <div class="register-container w-[35vw] bg-orange-50 p-8 rounded-md shadow-md mx-auto">
-        <h2 class="title text-2xl font-semibold text-center mb-4">welcome to login page</h2>      
+        <h2 class="title text-2xl font-semibold text-center mb-4">Welcome to login </h2>      
         <div class="max-w-screen-sm text-left mx-auto">
             <form action="{{ route('login') }}" method="POST" class="space-y-4">
                 @csrf
@@ -26,16 +26,16 @@
             @enderror
                 <!-- Register Button -->
                 <div class="mb-4">
-                    <button type="submit" class="w-full p-3 bg-orange-500 text-white font-semibold rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-green-400">login</button>
+                    <button type="submit" class="w-full p-3 bg-orange-500 text-white font-semibold rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-green-400">Login</button>
                 </div>
             </form>
 
+            <p>Don't have an account? <a href="{{route('register')}}" class="my-4 hover:text-rose-300">register</a></p>
             <!-- Social Login Buttons -->
-           <p>Don't have an account? <a href="{{route('register')}}" class="my-4 hover:text-rose-300">register</a></p>
             <div class="flex space-x-4 mt-6 justify-center">
                 <!-- Google Button -->
                 <button class="w-full sm:w-auto p-3 bg-white text-black border border-slate-300 rounded-md hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-400 flex items-center justify-center space-x-2">
-                    <img src="{{ asset('img/google-logo-24.png') }}" alt="Google" class="h-6 w-6">
+                   <a href="{{route('auth.google')}}"> <img src="{{ asset('img/google-logo-24.png') }}" alt="Google" class="h-6 w-6"></a>
                 </button>
 
                 <!-- Facebook Button -->

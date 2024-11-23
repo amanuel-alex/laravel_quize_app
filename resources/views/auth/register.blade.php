@@ -50,7 +50,7 @@
                 <div class="mb-4">
                     <button type="submit" class="w-full p-3 bg-orange-500 text-white font-semibold rounded-md hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-400">Register</button>
                 </div>
-                <p>Already have account ? <a  href="{{route('login')}}" class="hover:text-rose-300">login</a></p>
+                <p>Already have account ? <a  href="{{route('login')}}" class="hover:text-rose-300">Login</a></p>
             </form>
 
            

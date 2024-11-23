@@ -1,10 +1,14 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
+
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
+Route::controller(AuthController::class)->group(function () {
+    Route::get('/auth/google', 'googleLogin')->name('auth.google');
+    Route::get('auth/dashboard', 'googleAuthentication')->name('users.dashboard');
+});
 Route::view('/', 'posts.index')->name('home');
 Route::resource('/post', PostController::class);
 
@@ -19,6 +23,7 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
 });
 Route::middleware('auth')->group(function () {
+
 
 
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
