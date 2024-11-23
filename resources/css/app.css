@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* a {
+    position: relative;
+    max-width: max-content;
+}
+a::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    @apply bg-orange-600;
+    transition: 2s;
+}
+a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    @apply bg-orange-600;
+    transition: 2s;
+}
+
+a:hover::before,
+a:hover::after {
+    width: 100%;
+} */
