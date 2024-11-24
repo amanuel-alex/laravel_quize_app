@@ -30,7 +30,7 @@
                 </div>
             </form>
 
-            <p>Don't have an account? <a href="{{route('register')}}" class="my-4 hover:text-rose-300">register</a></p>
+            <p>Don't have an account? <a href="{{route('register')}}" class="my-4 hover:text-rose-300">Sign Up</a></p>
             <!-- Social Login Buttons -->
             <div class="flex space-x-4 mt-6 justify-center">
                 <!-- Google Button -->
@@ -38,14 +38,10 @@
                    <a href="{{route('auth.google')}}"> <img src="{{ asset('img/google-logo-24.png') }}" alt="Google" class="h-6 w-6"></a>
                 </button>
 
-                <!-- Facebook Button -->
-                <button class="w-full sm:w-auto p-3 bg-white text-white border border-slate-300 rounded-md hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-blue-400 flex items-center justify-center space-x-2">
-                    <img src="{{ asset('img/facebook-circle-logo-24.png') }}" alt="Google" class="h-6 w-6">
-                </button>
-
-                <!-- Apple Button -->
+                
+                <!-- Github Button -->
                 <button class="w-full sm:w-auto p-3 bg-white text-white border border-slate-300 rounded-md hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-black flex items-center justify-center space-x-2">
-                    <a href="{{route('github.login')}}"><img src="{{ asset('img/apple-logo-24.png') }}" alt="github" class="h-6 w-6"></a>
+                    <a href="{{route('github.login')}}"><img src="{{ asset('img/github-logo-24.png') }}" alt="github" class="h-6 w-6"></a>
                    
                 </button>
             </div>

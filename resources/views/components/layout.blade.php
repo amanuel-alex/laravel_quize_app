@@ -45,7 +45,7 @@
        @guest
        <div class="flex items-center gap-6 ">
         <a href="{{route('login')}}" class="nav-link text-lg font-semibold hover:text-orange-300">Login</a>
-        <a href="{{route('register')}}" class="nav-link text-lg font-semibold hover:text-orange-300 rounded">Register</a>
+        <a href="{{route('register')}}" class="nav-link text-lg font-semibold hover:text-orange-300 rounded">Sign Up</a>
     </div>
        @endguest
       </nav>

@@ -6,21 +6,25 @@ use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 Route::controller(AuthController::class)->group(function () {
+    // LOGIN WITH GOOGLE
     Route::get('/auth/google', 'googleLogin')->name('auth.google');
     Route::get('/auth/dashboard', 'googleAuthentication')->name('auth.google.dashboard');
-
+    // LOGIN WITH GITHUB
     Route::get('/auth/github', 'loginWithGithub')->name('github.login');
     Route::get('/auth/github_login', 'githubAuthentication')->name('github.github_login.dashboard');
+    // LOGIN WITH FACEBOOK
+    // Route::get('/auth/facebook', 'loginWithfacebook')->name('facebook.login');
+    // Route::get('/auth/facebook_login', 'facebookAuthentication')->name('facebook.facebook_login.dashboard');
 });
 
 
 
-
-Route::view('/', 'posts.index')->name('home');
+// post route implementation
+Route::redirect('/', 'posts');
 Route::resource('/post', PostController::class);
 
 // grouping  route using middleware{guest and authenticated}
-Route::middleware('guest')->group(function () {
+Route::middleware('web')->group(function () {
     Route::view('/', 'home')->name('home');
     Route::view('/about', 'products.about')->name('about');
     Route::view('/blog', 'products.blog')->name('blog');
