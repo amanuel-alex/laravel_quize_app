@@ -45,7 +45,7 @@
 
                 <!-- Apple Button -->
                 <button class="w-full sm:w-auto p-3 bg-white text-white border border-slate-300 rounded-md hover:bg-slate-300 focus:outline-none focus:ring-2 focus:ring-black flex items-center justify-center space-x-2">
-                    <img src="{{ asset('img/apple-logo-24.png') }}" alt="Google" class="h-6 w-6">
+                    <a href="{{route('github.login')}}"><img src="{{ asset('img/apple-logo-24.png') }}" alt="github" class="h-6 w-6"></a>
                    
                 </button>
             </div>

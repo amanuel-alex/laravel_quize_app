@@ -9,7 +9,7 @@
     <title>{{ env('APP_NAME') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-slate-400 text-slate-900 ">
+<body class="bg-slate-300 text-slate-900 ">
 
    <header class="bg-orange-50 shadow-lg fixed left-0 right-0  top-0 ">
       <nav class=" flex justify-between items-center w-[92%] mx-auto py-4  ">

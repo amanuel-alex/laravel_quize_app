@@ -11,6 +11,7 @@ use Laravel\Socialite\Facades\Socialite;
 use PhpParser\Node\Stmt\TryCatch;
 use Psy\Readline\Userland;
 
+
 class AuthController extends Controller
 {
     // register 
@@ -61,9 +62,8 @@ class AuthController extends Controller
             $user = User::where('google_id', $googleUser->id)->first();
 
             if ($user) {
-                // User exists, log them in
                 Auth::login($user);
-                return redirect()->route('users.dashboard');
+                return redirect()->route('dashboard');
             } else {
                 $userData = User::create([
                     'username' => $googleUser->name,
@@ -72,10 +72,12 @@ class AuthController extends Controller
                     'google_id' => $googleUser->id,
                 ]);
                 Auth::login($userData);
-                return redirect()->route('users.dashboard');
+                return redirect()->route('dashboard');
             }
         } catch (Exception $e) {
-            dd($e);
+            // Log the exception details
+            Log::error('Google authentication error: ' . $e->getMessage());
+            dd($e); // or return an error message
         }
     }
 
