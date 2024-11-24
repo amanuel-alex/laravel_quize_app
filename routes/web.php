@@ -9,11 +9,11 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('/auth/google', 'googleLogin')->name('auth.google');
     Route::get('/auth/dashboard', 'googleAuthentication')->name('auth.google.dashboard');
 
-    // Route::get('/auth/github', 'loginWithGithub')->name('auth.github');
-    // Route::get('/auth/github_login', 'githubAuthentication')->name('auth.github_login');
+    Route::get('/auth/github', 'loginWithGithub')->name('github.login');
+    Route::get('/auth/github_login', 'githubAuthentication')->name('github.github_login.dashboard');
 });
-Route::get('auth/github', [AuthController::class, 'loginWithGithub'])->name('github.login');
-Route::get('auth/github/github_login', [AuthController::class, 'githubAuthentication'])->name('github.github_login');
+
+
 
 
 Route::view('/', 'posts.index')->name('home');

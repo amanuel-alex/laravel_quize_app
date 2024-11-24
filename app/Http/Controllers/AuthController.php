@@ -48,8 +48,37 @@ class AuthController extends Controller
             return back()->withErrors(['failed' => 'The provided creditials do not match our record']);
         }
     }
+    public function loginWithGithub()
+    {
+        return Socialite::driver('github')->redirect();
+    }
+    public function githubAuthentication(){
+       
+        try {
+            $githubUser = Socialite::driver('github')->user();
+            $user = User::where('google_id',$githubUser->id)->first();
 
-    // login option using google facebook and github
+            if ($user) {
+                Auth::login($user);
+                return redirect()->route('dashboard');
+            } else {
+                $userData = User::create([
+                    'username' =>$githubUser->name,
+                    'email' =>$githubUser->email,
+                    'password' => Hash::make('quize@1234'),
+                    'google_id' =>$githubUser->id,
+                ]);
+                Auth::login($userData);
+                return redirect()->route('dashboard');
+            }
+        } catch (Exception $e) {
+            // Log the exception details
+            Log::error('github authentication error: ' . $e->getMessage());
+            dd($e); // or return an error message
+        }
+    }
+    
+    // login option using google 
 
     public function googleLogin()
     {
@@ -81,7 +110,7 @@ class AuthController extends Controller
         }
     }
 
-
+// login option with github
 
     public function logout(Request $request)
     {
