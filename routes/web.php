@@ -28,6 +28,8 @@ Route::middleware('web')->group(function () {
     Route::view('/', 'home')->name('home');
     Route::view('/about', 'products.about')->name('about');
     Route::view('/blog', 'products.blog')->name('blog');
+    Route::view('/references', 'products.references')->name('references');
+    Route::view('/quize', 'products.quize')->name('quize');
     Route::view('/register', 'auth.register')->name('register');
     Route::post('/register', [AuthController::class, 'register']);
     Route::view('/login', 'auth.login')->name('login');

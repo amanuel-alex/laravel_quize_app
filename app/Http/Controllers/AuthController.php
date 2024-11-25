@@ -48,6 +48,41 @@ class AuthController extends Controller
             return back()->withErrors(['failed' => 'The provided creditials do not match our record']);
         }
     }
+
+    // login option with facebook
+
+    // public function loginWithFacebook()
+    // {
+    //     return Socialite::driver('facebook')->redirect();
+    // }
+    // public function facebookAuthentication(){
+       
+    //     try {
+    //         $facebookUser = Socialite::driver('facebook')->user();
+    //         $user = User::where('facebook_id',$facebookUser->id)->first();
+
+    //         if ($user) {
+    //             Auth::login($user);
+    //             return redirect()->route('dashboard');
+    //         } else {
+    //             $uData = User::create([
+    //                 'username' =>$facebookUser->name,
+    //                 'email' =>$facebookUser->email,
+    //                 'password' => Hash::make('quize@1234'),
+    //                 'facebook_id' =>$facebookUser->id,
+    //             ]);
+    //             Auth::login($uData);
+    //             return redirect()->route('dashboard');
+    //         }
+    //     } catch (Exception $e) {
+    //         // Log the exception details
+    //         Log::error('github authentication error: ' . $e->getMessage());
+    //         dd($e); // or return an error message
+    //     }
+    // }
+    
+    // login option with github
+
     public function loginWithGithub()
     {
         return Socialite::driver('github')->redirect();
@@ -56,19 +91,19 @@ class AuthController extends Controller
        
         try {
             $githubUser = Socialite::driver('github')->user();
-            $user = User::where('google_id',$githubUser->id)->first();
+            $user = User::where('github_id',$githubUser->id)->first();
 
             if ($user) {
                 Auth::login($user);
                 return redirect()->route('dashboard');
             } else {
-                $userData = User::create([
+                $uData = User::create([
                     'username' =>$githubUser->name,
                     'email' =>$githubUser->email,
                     'password' => Hash::make('quize@1234'),
-                    'google_id' =>$githubUser->id,
+                    'github_id' =>$githubUser->id,
                 ]);
-                Auth::login($userData);
+                Auth::login($uData);
                 return redirect()->route('dashboard');
             }
         } catch (Exception $e) {

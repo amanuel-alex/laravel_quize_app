@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+a {
+    color: rgba(37, 38, 94, 0.7);
+}
 /* a {
     position: relative;
     max-width: max-content;
@@ -43,3 +46,45 @@ nav.scrolled {
     z-index: 100;
     transition: background-color 3s ease, height 3s ease, padding 3s ease;
 } */
+body {
+    -webkit-font-smoothing: antialiased;
+    color: #25265e;
+    font-family: "euclid_circular_a", "Arial", "Source Sans Pro",
+        "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    text-rendering: optimizeLegibility;
+    font-size: 16px;
+    line-height: 24px;
+}
+
+p {
+    color: rgba(37, 38, 94, 0.7);
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 16px;
+    text-transform: calc();
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "euclid_circular_a", "Arial", "Source Sans Pro",
+        "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    margin: 0;
+    color: #25265e;
+}
+
+h1 {
+    font-size: 3rem;
+
+    margin-bottom: 20px;
+    font-size: 40px;
+    line-height: 44px;
+}
+
+h2 {
+    font-size: 28px;
+    line-height: 42px;
+    margin-bottom: 12px;
+}

@@ -7,6 +7,9 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
     <title>{{ env('APP_NAME') }}</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css')}}">
+
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-slate-300 text-slate-900 ">
@@ -16,11 +19,13 @@
         {{-- <img src="{{ asset('img/logo4.png') }}" alt="logo" class="w-22 h-10">  --}}
         <h2 class="nav-link text-lg font-semibold">logo</h2>
         <div class="flex items-center gap-4">
-          <a href="{{route('home')}}" class="nav-link text-lg font-semibold hover:text-orange-300">Home</a>
-          <a href="{{route('about')}}" class="nav-link text-lg font-semibold hover:text-orange-300">About</a>
-          <a href="{{route('explore')}}" class="nav-link text-lg font-semibold hover:text-orange-300">Explore</a>
-          <a href="{{route('blog')}}" class="nav-link text-lg font-semibold hover:text-orange-300">Blog</a>
-          <a href="{{route('support')}}" class="nav-link text-lg font-semibold hover:text-orange-300">Support</a>
+          <a href="{{route('home')}}" class="nav-link text-lg font-semibold hover:text-green-700">Home</a>
+          <a href="{{route('about')}}" class="nav-link text-lg font-semibold hover:text-green-700">About</a>
+          <a href="{{route('explore')}}" class="nav-link text-lg font-semibold hover:text-green-700">Explore</a>
+          <a href="{{route('references')}}" class="nav-link text-lg font-semibold hover:text-green-700">References</a>
+          <a href="{{route('quize')}}" class="nav-link text-lg font-semibold hover:text-green-700">Quize</a>
+          <a href="{{route('blog')}}" class="nav-link text-lg font-semibold hover:text-green-700">Blog</a>
+          <a href="{{route('support')}}" class="nav-link text-lg font-semibold hover:text-green-700">Support</a>
          
         </div>
        
