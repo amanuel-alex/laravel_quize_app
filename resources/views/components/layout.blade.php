@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <title>{{ env('APP_NAME') }}</title>
     <link rel="stylesheet" href="{{ asset('css/app.css')}}">
 
@@ -60,9 +61,53 @@
      {{$slot}}
    </main>
 
-   <footer>
-     <h1 class="text-4xl ">Footer</h1>
-   </footer>
+   <footer class="bg-[#123456] py-8">
+    <div class="container mx-auto px-6 sm:px-12 ">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+           
+           
+ <!-- Social Media Section -->
+ <div class="social-media">
+  <h3 class="text-lg font-semibold mb-4 text-rose-400">Follow Us</h3>
+  <ul class="flex space-x-4 text-lg ">
+      <li><a href="#" class=" hover:text-blue-400"><i class='bx bg-white text-lg rounded-lg p-2 bxl-facebook'></i></a></li>
+      <li><a href="#" class="text-blue-400 hover:text-blue-300"><i class='bx bg-white text-lg rounded-lg p-2 bxl-github'></i></a></li>
+      <li><a href="#" class="text-pink-600 hover:text-pink-400"><i class='bx bg-white text-lg rounded-lg p-2 bxl-linkedin'></i></a></li>
+      <li><a href="#" class="text-blue-700 hover:text-blue-500"><i class='bx bg-white text-lg rounded-lg p-2 bxl-gmail'></i></a></li>
+  </ul>
+</div>
+            <!-- Quick Links Section -->
+            <div class="quick-links">
+                <h3 class="text-lg font-semibold mb-4 text-rose-400">Quick Links</h3>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="{{ route('home') }}" class="hover:text-green-400   text-white">Home</a></li>
+                    <li><a href="{{ route('about') }}" class="hover:text-green-400  text-white" >About</a></li>
+                    <li><a href="{{ route('explore') }}" class="hover:text-green-400  text-white">explore</a></li>
+                    <li><a href="{{ route('home') }}" class="hover:text-green-400  text-white">Home</a></li>
+                    <li><a href="{{ route('about') }}" class="hover:text-green-400  text-white">About</a></li>
+                    <li><a href="{{ route('explore') }}" class="hover:text-green-400  text-white">explore</a></li>
+                    
+                </ul>
+            </div>
+
+           
+            <div class="about-us">
+              <h3 class="text-lg font-semibold mb-4 text-rose-400">About Us</h3>
+              <p class="text-lg  text-green-500 text_family">our mission is to create deliverable products that are not only functional but also intuitive and impactful. developing mobile applications, web platforms, and AI-powered systems
+          </p>
+          </div>
+        </div>
+
+        <!-- Footer Bottom Section -->
+        <div class="mt-8 border-t border-gray-700 pt-4 text-center text-sm">
+            <p class="text-slate-300">&copy; {{ date('Y') }} All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Optional: FontAwesome for social media icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
    <script>
