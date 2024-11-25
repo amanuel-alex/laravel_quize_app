@@ -2,50 +2,56 @@
 @tailwind components;
 @tailwind utilities;
 
-a {
-    color: rgba(37, 38, 94, 0.7);
+.register {
+    border-top: 2px solid green;
+    border-bottom: 2px solid green;
+    border-radius: 0.56rem;
+    padding: 0 1rem;
 }
-/* a {
+.navOs {
+    text-transform: capitalize;
+    font-size: 1.3rem;
     position: relative;
     max-width: max-content;
+    border-radius: 0.8rem;
 }
-a::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 4px;
-    @apply bg-orange-600;
-    transition: 2s;
+.navO {
+    color: #25265eb3;
+    position: relative;
+    max-width: max-content;
+
+    border-radius: 0.5rem;
+    box-shadow: 1rem 1rem 4rem rgba(0, 0, 0, 0.25);
 }
-a::after {
+
+.navO::before,
+.navOs::before {
     content: "";
     position: absolute;
     bottom: 0;
     left: 0;
     width: 0%;
-    height: 4px;
-    @apply bg-orange-600;
-    transition: 2s;
+    height: 2px;
+    @apply bg-green-600;
+    transition: 400ms;
 }
 
-a:hover::before,
-a:hover::after {
+.navO:hover::before,
+.navOs:hover::before {
+    border: none;
     width: 100%;
-} */
-
+}
 /* nav bar scroll behaviour */
-/* nav {
-   
-    @apply bg-slate-200 transition-all duration-300 ease-in-out;
+header {
+    transition: background-color 0.9s ease, height 0.9s ease, padding 0.9s ease;
 }
 
-nav.scrolled {
-    @apply bg-green-700 text-slate-200;
-    z-index: 100;
-    transition: background-color 3s ease, height 3s ease, padding 3s ease;
-} */
+header.scrolled {
+    background: #d5eaff;
+
+    transition: background-color 0.9s ease, height 0.9s ease, padding 0.9s ease;
+}
+
 body {
     -webkit-font-smoothing: antialiased;
     color: #25265e;
@@ -109,7 +115,64 @@ h1 {
 }
 
 h2 {
-    font-size: 28px;
+    font-size: 3px;
     line-height: 42px;
     margin-bottom: 12px;
+    text-transform: uppercase;
+}
+/* Initial hamburger icon setup */
+.toggleMenu {
+    font-size: 3rem;
+    display: none;
+    cursor: pointer;
+}
+
+@media (max-width: 880px) {
+    .toggleMenu {
+        display: block;
+        margin: 0 1rem;
+    }
+    .register-container {
+        width: 100%;
+    }
+
+    .navbar {
+        background: #262726;
+        position: absolute;
+        top: 5rem;
+        left: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.5s ease;
+    }
+    .navbar a {
+        color: #fff;
+    }
+
+    .registered {
+        background: #262726;
+        color: #fff;
+        gap: 2rem;
+        overflow: hidden;
+        z-index: 100;
+
+        position: absolute;
+        top: 29.2rem;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-around;
+        max-height: 0;
+        transition: max-height 0.5s ease;
+    }
+}
+
+.navbar.open,
+.registered.open {
+    max-height: 500px;
+    transition: max-height 0.3s ease-in-out;
 }
