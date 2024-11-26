@@ -2,14 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
-use PhpParser\Node\Stmt\TryCatch;
-use Psy\Readline\Userland;
+
+
+
 
 
 class AuthController extends Controller
@@ -56,7 +58,7 @@ class AuthController extends Controller
     //     return Socialite::driver('facebook')->redirect();
     // }
     // public function facebookAuthentication(){
-       
+
     //     try {
     //         $facebookUser = Socialite::driver('facebook')->user();
     //         $user = User::where('facebook_id',$facebookUser->id)->first();
@@ -80,39 +82,42 @@ class AuthController extends Controller
     //         dd($e); // or return an error message
     //     }
     // }
-    
+
     // login option with github
 
     public function loginWithGithub()
     {
         return Socialite::driver('github')->redirect();
     }
-    public function githubAuthentication(){
-       
+    public function githubAuthentication()
+    {
         try {
             $githubUser = Socialite::driver('github')->user();
-            $user = User::where('github_id',$githubUser->id)->first();
+
+
+            $user = User::where('github_id', $githubUser->id)->first();
 
             if ($user) {
+
                 Auth::login($user);
                 return redirect()->route('dashboard');
             } else {
                 $uData = User::create([
-                    'username' =>$githubUser->name,
-                    'email' =>$githubUser->email,
+                    'username' => $githubUser->name,
+                    'email' => $githubUser->email,
                     'password' => Hash::make('quize@1234'),
-                    'github_id' =>$githubUser->id,
+                    'github_id' => $githubUser->id,
                 ]);
                 Auth::login($uData);
                 return redirect()->route('dashboard');
             }
         } catch (Exception $e) {
-            // Log the exception details
-            Log::error('github authentication error: ' . $e->getMessage());
-            dd($e); // or return an error message
+
+            Log::error('GitHub authentication error: ' . $e->getMessage());
+            return redirect()->route('login')->with('error', 'GitHub authentication failed. Please try again.');
         }
     }
-    
+
     // login option using google 
 
     public function googleLogin()
@@ -145,7 +150,7 @@ class AuthController extends Controller
         }
     }
 
-// login option with github
+    // login option with github
 
     public function logout(Request $request)
     {

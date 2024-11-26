@@ -30,7 +30,7 @@
                 </div>
             </form>
 
-            <p>Don't have an account? <a href="{{route('register')}}" class="my-4 hover:text-rose-300">Sign Up</a></p>
+            <p class="link_element">Don't have an account? <a href="{{route('register')}}" class="my-4 hover:text-rose-300">Sign Up</a></p>
             <!-- Social Login Buttons -->
             <div class="flex space-x-4 mt-6 justify-center">
                 <!-- Google Button -->

@@ -15,9 +15,9 @@
 </head>
 <body class="bg-slate-300 text-slate-900 ">
   <header class="bg-orange-50 shadow-lg fixed left-0 right-0 top-0 scrolled">
-    <nav class="flex justify-between items-center w-[92%] mx-auto py-4">
+    <nav class="flex justify-between items-center w-[92%] mx-auto  ">
       {{-- <img src="{{ asset('img/logo4.png') }}" alt="logo" class="w-22 h-10"> --}}
-      <a href="{{ route('home') }}" class="nav-link text-lg font-semibold">Logo</a>
+      <a href="{{ route('home') }}" class="nav-link text-lg font-semibold">AmanView</a>
   
       <div class="flex items-center gap-4 navbar" id="menuList">
         <a href="{{ route('home') }}" class="nav-link navO text-lg font-semibold hover:text-green-700">Home</a>
@@ -31,17 +31,20 @@
   
       @auth
       <div class="relative grid place-items-center" x-data="{ open: false }">
-        <button @click="open = !open" class="btn">
-          <p class="username hover:text-black text-lg font-medium capitalize">{{ auth()->user()->username }}</p>
-        </button>
+        <div  class=" flex btn cursor-pointer">
+          
+          <h6 @click="open = !open" class="username hover:text-black  capitalize py-4">{{ auth()->user()->username }}</h6>
+          <i class="bx bx-menu toggleMenu" onclick="toggleMenu()"></i>
+        </div>
         <div x-show="open" @click.outside="open = false" class="absolute top-11 px-4 py-5 right-0 overflow-hidden rounded-lg bg-slate-200 shadow-lg">
-          <p class="email mb-4 hover:text-slate-400">{{ auth()->user()->email }}</p>
+          <p class="email mb-4 ">{{ auth()->user()->email }}</p>
           <a href="{{ route('dashboard') }}" class="dashboard mb-8 hover:text-slate-400">Dashboard</a>
           <form action="{{ route('logout') }}" method="POST">
             @csrf
             <button class="block mt-4 w-full text-left hover:text-slate-400">Logout</button>
           </form>
         </div>
+       
       </div>
       @endauth
   
@@ -61,48 +64,50 @@
    </main>
 
    <footer class="bg-[#123456] py-8">
-    <div class="container mx-auto px-6 sm:px-12 ">
+    <div class="container mx-auto px-6 sm:px-12">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-           
-           
- <!-- Social Media part-->
- <div class="social-media">
-  <h3 class="text-lg font-semibold mb-4 text-rose-400">Follow Us</h3>
-  <ul class="flex space-x-4 text-lg ">
-      <li><a href="#" class=" hover:text-blue-400"><i class='bx bg-white text-lg rounded-lg p-2 bxl-facebook'></i></a></li>
-      <li><a href="#" class="text-blue-400 hover:text-blue-300"><i class='bx bg-white text-lg rounded-lg p-2 bxl-github'></i></a></li>
-      <li><a href="#" class="text-pink-600 hover:text-pink-400"><i class='bx bg-white text-lg rounded-lg p-2 bxl-linkedin'></i></a></li>
-      <li><a href="#" class="text-blue-700 hover:text-blue-500"><i class='bx bg-white text-lg rounded-lg p-2 bxl-gmail'></i></a></li>
-  </ul>
-</div>
-            <!-- Quick Links Section -->
-            <div class="quick-links">
-                <h3 class="text-lg font-semibold mb-4 text-rose-400  ">Quick Links</h3>
-                <ul class="space-y-2 text-sm">
-                    <li><a href="{{ route('home') }}" class="hover:text-green-400 navOs  text-blue-400">Home</a></li>
-                    <li><a href="{{ route('about') }}" class="hover:text-green-400 navOs text-blue-400" >About</a></li>
-                    <li><a href="{{ route('explore') }}" class="hover:text-green-400 navOs text-blue-400">explore</a></li>
-                    <li><a href="{{ route('references') }}" class="hover:text-green-400 navOs text-blue-400">references</a></li>
-                    <li><a href="{{ route('quize') }}" class="hover:text-green-400 navOs text-blue-400">quize</a></li>
-                    <li><a href="{{ route('explore') }}" class="hover:text-green-400 navOs text-blue-400">explore</a></li>
-                    
+
+            <!-- Social Media part -->
+            <div class="social-media">
+                <h3 class="text-lg font-semibold mb-4 text-rose-400">Follow Us</h3>
+                <ul class="flex space-x-4 text-lg">
+                    <li><a href="#" class="hover:text-blue-400"><i class='bx bg-white text-lg rounded-lg p-2 bxl-facebook'></i></a></li>
+                    <li><a href="#" class="text-blue-400 hover:text-blue-300"><i class='bx bg-white text-lg rounded-lg p-2 bxl-github'></i></a></li>
+                    <li><a href="#" class="text-pink-600 hover:text-pink-400"><i class='bx bg-white text-lg rounded-lg p-2 bxl-linkedin'></i></a></li>
+                    <li><a href="#" class="text-blue-700 hover:text-blue-500"><i class='bx bg-white text-lg rounded-lg p-2 bxl-gmail'></i></a></li>
                 </ul>
             </div>
 
-           
+            <!-- Quick Links Section -->
+            <div class="quick-links">
+                <h3 class="text-lg font-semibold mb-4 text-rose-400">Quick Links</h3>
+                <ul class="space-y-2 text-md">
+                    <li><a href="{{ route('home') }}" class="hover:text-green-400 navOs text-blue-400">Home</a></li>
+                    <li><a href="{{ route('about') }}" class="hover:text-green-400 navOs text-blue-400">About</a></li>
+                    <li><a href="{{ route('explore') }}" class="hover:text-green-400 navOs text-blue-400">Explore</a></li>
+                    <li><a href="{{ route('references') }}" class="hover:text-green-400 navOs text-blue-400">References</a></li>
+                    <li><a href="{{ route('quize') }}" class="hover:text-green-400 navOs text-blue-400">Quiz</a></li>
+                    <li><a href="{{ route('blog') }}" class="hover:text-green-400 navOs text-blue-400">Blog</a></li>
+                    <li><a href="{{ route('support') }}" class="hover:text-green-400 navOs text-blue-400">Support</a></li>
+                </ul>
+            </div>
+
+            <!-- About Us Section -->
             <div class="about-us">
-              <h3 class="text-lg font-semibold mb-4 text-rose-400">About Us</h3>
-              <p class="text-lg  text-green-500 text_family">Our mission is to create deliverable products that are not only functional but also intuitive and impactful. developing mobile applications, web platforms, and AI-powered systems
-          </p>
-          </div>
+                <h3 class="text-lg font-semibold mb-4 text-white">About Us</h3>
+                <p class="text-md text-center border text-family px-4 sm:px-8 md:px-12 lg:px-16 rounded-lg ">
+                    Our mission is to create deliverable products that are not only functional but also intuitive and impactful. We specialize in developing mobile apps, web platforms, and AI-powered systems.
+                </p>
+            </div>
         </div>
 
         <!-- Footer Bottom Section -->
-        <div class="mt-8  border-t border-gray-700 pt-4 text-center text-sm">
+        <div class="mt-8 border-t border-gray-700 pt-4 text-center text-sm">
             <p class="text-white">&copy; {{ date('Y') }} All rights reserved.</p>
         </div>
     </div>
 </footer>
+
 
 <!-- Optional: FontAwesome for social media icons -->
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
@@ -119,6 +124,7 @@
         header.classList.remove('scrolled');  // Remove the 'scrolled' class when not scrolling
     }
 });
+
 
 // Toggle menu visibility for mobile
 function toggleMenu() {
