@@ -36,7 +36,7 @@
           <h6 @click="open = !open" class="username hover:text-black  capitalize py-4">{{ auth()->user()->username }}</h6>
           <i class="bx bx-menu toggleMenu" onclick="toggleMenu()"></i>
         </div>
-        <div x-show="open" @click.outside="open = false" class="absolute top-11 px-4 py-5 right-0 overflow-hidden rounded-lg bg-slate-200 shadow-lg">
+        <div x-show="open" @click.outside="open = false" class="absolute top-14 px-4 py-5 right-0 overflow-hidden rounded-lg bg-slate-200 shadow-lg">
           <p class="email mb-4 ">{{ auth()->user()->email }}</p>
           <a href="{{ route('dashboard') }}" class="dashboard mb-8 hover:text-slate-400">Dashboard</a>
           <form action="{{ route('logout') }}" method="POST">

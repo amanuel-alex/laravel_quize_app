@@ -80,6 +80,14 @@ p.border {
     border-bottom: 4px solid rgb(169, 180, 169);
     border-radius: 0.8rem;
 }
+.about-us p.border {
+    border-top: 4px solid rgb(168, 177, 168);
+    border-bottom: 4px solid rgb(169, 180, 169);
+    border-radius: 0.8rem;
+    color: chartreuse;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
 h1,
 h2,
 h3,
@@ -96,7 +104,6 @@ h6 {
     padding: 16px;
     border-radius: 9px;
     border: 1px solid #8da3bb;
-
     margin-bottom: 3rem;
     overflow: auto;
     background-color: azure;
@@ -129,6 +136,12 @@ h2 {
         display: block;
         margin: 0 1rem;
     }
+    header {
+        z-index: 1000;
+    }
+    nav {
+        z-index: 1000;
+    }
     .register-container,
     .register-container p {
         width: 100%;
@@ -145,7 +158,6 @@ h2 {
         left: 0;
         right: 0;
         display: flex;
-
         flex-direction: column;
         gap: 1.8rem;
         overflow: hidden;
@@ -167,7 +179,6 @@ h2 {
         color: #fff;
         gap: 2rem;
         overflow: hidden;
-
         position: absolute;
         top: 29.2rem;
         left: 0;
@@ -211,7 +222,6 @@ h2 {
         text-align: center;
     }
 }
-
 .navbar.open,
 .registered.open {
     max-height: fit-content;

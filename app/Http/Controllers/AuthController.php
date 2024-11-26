@@ -37,19 +37,28 @@ class AuthController extends Controller
     }
     public function login(Request $request)
     {
+        // Validate the incoming request data
         $fields = $request->validate([
-
             'email' => ['required', 'max:255', 'email'],
             'password' => ['required'],
-
         ]);
 
+        // Attempt to authenticate the user
         if (Auth::attempt($fields, $request->remember)) {
-            return  redirect()->intended();
-        } else {
-            return back()->withErrors(['failed' => 'The provided creditials do not match our record']);
+            // Authentication successful, now check user role
+            if (Auth::user()->role === 'admin') {
+                // Redirect to admin dashboard if the user is an admin
+                return redirect()->route('admin.dashboard');
+            }
+
+            // Redirect to user dashboard if the user is not an admin
+            return redirect()->route('dashboard');
         }
+
+        // If authentication fails, redirect back with an error message
+        return back()->withErrors(['failed' => 'The provided credentials do not match our records.']);
     }
+
 
     // login option with facebook
 
