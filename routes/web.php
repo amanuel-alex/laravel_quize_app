@@ -3,13 +3,9 @@
 use App\Http\Controllers\AuthController;
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\AdminDashboardController;
-use App\Http\Controllers\QuestionController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\RecommendationController;
-use App\Http\Controllers\FileUploadController;
 
 Route::controller(AuthController::class)->group(function () {
     // LOGIN WITH GOOGLE
@@ -39,47 +35,19 @@ Route::middleware('web')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
 });
 Route::middleware('auth')->group(function () {
+
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::view('/dashboard', 'users.dashboard')->name('dashboard');
     Route::view('/explore', 'products.explore')->name('explore');
     Route::view('/support', 'products.support')->name('support');
+    Route::view('/dashboard', 'dashboard')->name('dashboard');
 });
 
 
+// Route::view('/admin/store/create', 'admin.store.index')->name('store.create');
+Route::view('/admin/store/index', 'admin.store.index')->name('manage.questions');
+Route::get('/admin/store/create', [userController::class, ''])->name('store.create');
 
-
-
-// Route::get('/dashboard', [DashboardController::class, 'index']);
-
-
-
-// Admin dashboard and features
-Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
-
-
-    // Questions Routes
-    Route::prefix('questions')->name('admin.questions.')->group(function () {
-        Route::get('/create', [QuestionController::class, 'create'])->name('create');
-        Route::post('/store', [QuestionController::class, 'store'])->name('store');
-    });
-
-    // Users Routes
-    Route::prefix('users')->name('admin.users.')->group(function () {
-        Route::get('/', [UserController::class, 'index'])->name('index');
-    });
-
-    // Recommendations Routes
-    Route::prefix('recommendations')->name('admin.recommendations.')->group(function () {
-        Route::get('/', [RecommendationController::class, 'index'])->name('index');
-        Route::post('/send', [RecommendationController::class, 'send'])->name('send');
-    });
-
-    // File Upload Routes
-    Route::prefix('upload')->name('admin.upload.')->group(function () {
-        Route::get('/', [FileUploadController::class, 'index'])->name('index');
-        Route::post('/store', [FileUploadController::class, 'store'])->name('store');
-    });
-});
-
-Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+// user controllers
+Route::get('/admin/user/index', [userController::class, 'loadAllUser'])->name('user_detail');
+Route::get('/admin/user/index/create', [userController::class, 'addUserForm']);
+Route::post('/admin/user/index/create', [userController::class, 'AddUser'])->name('user.create');

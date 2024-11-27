@@ -14,12 +14,12 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-slate-300 text-slate-900 ">
-  <header class="bg-orange-50 shadow-lg fixed left-0 right-0 top-0 scrolled">
+  <header class="bg-orange-50 shadow-lg fixed left-0 right-0 top-0 scrolled py-2">
     <nav class="flex justify-between items-center w-[92%] mx-auto  ">
       {{-- <img src="{{ asset('img/logo4.png') }}" alt="logo" class="w-22 h-10"> --}}
       <a href="{{ route('home') }}" class="nav-link text-lg font-semibold">AmanView</a>
   
-      <div class="flex items-center gap-4 navbar" id="menuList">
+      <div class="flex items-center gap-4  navbar" id="menuList">
         <a href="{{ route('home') }}" class="nav-link navO text-lg font-semibold hover:text-green-700">Home</a>
         <a href="{{ route('about') }}" class="nav-link navO text-lg font-semibold hover:text-green-700">About</a>
         <a href="{{ route('explore') }}" class="nav-link navO text-lg font-semibold hover:text-green-700">Explore</a>
@@ -33,7 +33,7 @@
       <div class="relative grid place-items-center" x-data="{ open: false }">
         <div  class=" flex btn cursor-pointer">
           
-          <h6 @click="open = !open" class="username hover:text-black  capitalize py-4">{{ auth()->user()->username }}</h6>
+          <h6 @click="open = !open" class="username hover:text-black  capitalize py-2 ">{{ auth()->user()->username }}</h6>
           <i class="bx bx-menu toggleMenu" onclick="toggleMenu()"></i>
         </div>
         <div x-show="open" @click.outside="open = false" class="absolute top-14 px-4 py-5 right-0 overflow-hidden rounded-lg bg-slate-200 shadow-lg">

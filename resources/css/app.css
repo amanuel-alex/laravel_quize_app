@@ -88,6 +88,11 @@ p.border {
     padding-left: 1rem;
     padding-right: 1rem;
 }
+.username {
+    border-radius: 0.8rem;
+    border-bottom: 2px solid green;
+    border-top: 2px solid green;
+}
 h1,
 h2,
 h3,
