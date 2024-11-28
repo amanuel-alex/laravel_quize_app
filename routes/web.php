@@ -47,7 +47,16 @@ Route::middleware('auth')->group(function () {
 Route::view('/admin/store/index', 'admin.store.index')->name('manage.questions');
 Route::get('/admin/store/create', [userController::class, ''])->name('store.create');
 
-// user controllers
-Route::get('/admin/user/index', [userController::class, 'loadAllUser'])->name('user_detail');
-Route::get('/admin/user/index/create', [userController::class, 'addUserForm']);
-Route::post('/admin/user/index/create', [userController::class, 'AddUser'])->name('user.create');
+// User CRUD Routes
+Route::get('/admin/user/index', [UserController::class, 'loadAllUser'])->name('user_detail'); // Show all users
+
+// Routes for adding a new user
+Route::get('/admin/user/index/create', [UserController::class, 'addUserForm'])->name('addUserForm'); // Form to create a new user
+Route::post('/admin/user/index/create', [UserController::class, 'AddUser'])->name('user.create'); // Handle the creation of a new user
+
+// Routes for editing a user
+Route::get('/admin/user/index/edit/{id}', [UserController::class, 'editUserForm'])->name('editUserForm'); // Form to edit a user
+Route::post('/admin/user/index/edit/{id}', [UserController::class, 'update'])->name('user.edit'); // Handle the update of the user
+
+// Route for deleting a user (using POST)
+Route::post('/admin/user/index/delete/{id}', [UserController::class, 'deleteUser'])->name('deleteUser');
