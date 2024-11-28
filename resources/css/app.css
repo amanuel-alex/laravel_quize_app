@@ -62,6 +62,11 @@ body {
     line-height: 24px;
     overflow-x: hidden;
 }
+/* Optional styling for the dropdown */
+[x-cloak] {
+    display: none;
+}
+
 .text_family {
     font-family: "euclid_circular_a", "Arial", "Source Sans Pro",
         "Helvetica Neue", "Helvetica", "Arial", sans-serif;

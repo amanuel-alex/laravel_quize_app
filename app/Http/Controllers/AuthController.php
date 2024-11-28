@@ -11,11 +11,51 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Socialite\Facades\Socialite;
 
 
-
-
-
 class AuthController extends Controller
 {
+
+
+    public function adminregister(Request $request)
+    {
+
+        // validate
+        $fields = $request->validate([
+
+            'username' => ['required', 'max:255', 'string', 'regex:/^[A-Za-z\s]+$/'],
+            'email' => ['required', 'max:255', 'email', 'unique:users'],
+            'password' => ['required', 'min:4', 'confirmed'],
+
+        ]);
+        // register
+        $user = User::create($fields);
+        // login
+        Auth::login($user);
+        // redirect
+        return redirect()->route('home');
+    }
+    public function adminlogin(Request $request)
+    {
+        // Validate the incoming request data
+        $fields = $request->validate([
+            'email' => ['required', 'max:255', 'email'],
+            'password' => ['required'],
+        ]);
+
+        // Attempt to authenticate the user
+        if (Auth::attempt($fields, $request->remember)) {
+            // Authentication successful, now check user role
+            if (Auth::user()->role === 'admin') {
+                // Redirect to admin dashboard if the user is an admin
+                return redirect()->route('admin.dashboard');
+            }
+
+            // Redirect to user dashboard if the user is not an admin
+            return redirect()->route('dashboard');
+        }
+
+        // If authentication fails, redirect back with an error message
+        return back()->withErrors(['failed' => 'The provided credentials do not match our records.']);
+    }
     // register 
     public function register(Request $request)
     {

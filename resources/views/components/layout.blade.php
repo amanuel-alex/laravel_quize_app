@@ -47,14 +47,64 @@
        
       </div>
       @endauth
-  
       @guest
-      <div class="flex items-center gap-6 registered" id="registerList">
+<!-- Initial container with Alpine.js state management -->
+<div class="flex items-center gap-6" x-data="{ showRoleSelection: false, selectedRole: null }">
+    <!-- Sign Up Button: only visible if no role is selected -->
+    <button 
+        @click="showRoleSelection = true" 
+        class="nav-link text-lg font-semibold hover:text-green-600" 
+        x-show="!selectedRole && !showRoleSelection"
+    >
+        Sign Up
+    </button>
+    <div 
+        x-show="showRoleSelection" 
+        @click.away="showRoleSelection = false" 
+        class="absolute top-14 right-0 p-4 bg-white shadow-lg rounded-lg"
+    >
+        <h3 class="font-semibold mb-2">Select an option</h3>
+        <ul>
+            <li>
+                <a 
+                    href="#" 
+                    @click="selectedRole = 'admin'; showRoleSelection = false" 
+                    class="text-lg hover:text-green-600"
+                >
+                    Admin
+                </a>
+            </li>
+            <li>
+                <a 
+                    href="#" 
+                    @click="selectedRole = 'user'; showRoleSelection = false" 
+                    class="text-lg hover:text-green-600"
+                >
+                    User
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- For User role -->
+    <div x-show="selectedRole === 'user'" class="flex items-center gap-6 registered" id="registerList">
         <a href="{{ route('login') }}" class="nav-link text-lg font-semibold hover:text-green-600 register">Login</a>
         <a href="{{ route('register') }}" class="nav-link text-lg font-semibold hover:text-green-600 rounded register">Sign Up</a>
-      </div>
-      <i class="bx bx-menu toggleMenu" onclick="toggleMenu()"></i>
-      @endguest
+    </div>
+
+    <!-- For Admin role -->
+    <div x-show="selectedRole === 'admin'" class="flex items-center gap-6 registered" id="registerList">
+        <a href="{{ route('adminLogin') }}" class="nav-link text-lg font-semibold hover:text-green-600 register">Login</a>
+        <a href="{{ route('adminRegister') }}" class="nav-link text-lg font-semibold hover:text-green-600 rounded register">Sign Up</a>
+    </div>
+
+</div>
+
+<!-- Optional: Menu Toggle Icon -->
+<i class="bx bx-menu toggleMenu" onclick="toggleMenu()"></i>
+@endguest
+
+      
+      
     </nav>
   </header>
   
@@ -109,7 +159,7 @@
 </footer>
 
 
-<!-- Optional: FontAwesome for social media icons -->
+
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 
    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
