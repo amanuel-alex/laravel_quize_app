@@ -19,6 +19,11 @@ class userController extends Controller
     {
         return view('admin.user.create');
     }
+    public function index()
+    {
+        // Return the view for the user dashboard
+        return view('user.dashboard');
+    }
     public function AddUser(Request $request)
     {
 

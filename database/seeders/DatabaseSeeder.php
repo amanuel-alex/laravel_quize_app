@@ -4,10 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Post;
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-
-use function Pest\Laravel\post;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,7 +13,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Create 10 users and 15 posts
+        User::factory(10)->create();
         Post::factory(15)->create();
+
+        $this->call([
+            RolesAndPermissionsSeeder::class,
+            // other seeders...
+        ]);
     }
 }

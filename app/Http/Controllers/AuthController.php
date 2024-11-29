@@ -86,13 +86,13 @@ class AuthController extends Controller
         // Attempt to authenticate the user
         if (Auth::attempt($fields, $request->remember)) {
             // Authentication successful, now check user role
-            if (Auth::user()->role === 'admin') {
+            if (Auth::user()->role === 'user') {
                 // Redirect to admin dashboard if the user is an admin
-                return redirect()->route('admin.dashboard');
+                return redirect()->route('admin.user.dashboard');
             }
 
             // Redirect to user dashboard if the user is not an admin
-            return redirect()->route('dashboard');
+            return redirect()->route('admin.user.dashboard');
         }
 
         // If authentication fails, redirect back with an error message
@@ -149,7 +149,7 @@ class AuthController extends Controller
             if ($user) {
 
                 Auth::login($user);
-                return redirect()->route('dashboard');
+                return redirect()->route('admin.user.dashboard');
             } else {
                 $uData = User::create([
                     'username' => $githubUser->name,
@@ -158,7 +158,7 @@ class AuthController extends Controller
                     'github_id' => $githubUser->id,
                 ]);
                 Auth::login($uData);
-                return redirect()->route('dashboard');
+                return redirect()->route('admin.user.dashboard');
             }
         } catch (Exception $e) {
 
@@ -181,7 +181,7 @@ class AuthController extends Controller
 
             if ($user) {
                 Auth::login($user);
-                return redirect()->route('dashboard');
+                return redirect()->route('admin.user.dashboard');
             } else {
                 $userData = User::create([
                     'username' => $googleUser->name,
@@ -190,7 +190,7 @@ class AuthController extends Controller
                     'google_id' => $googleUser->id,
                 ]);
                 Auth::login($userData);
-                return redirect()->route('dashboard');
+                return redirect()->route('admin.user.dashboard');
             }
         } catch (Exception $e) {
             // Log the exception details

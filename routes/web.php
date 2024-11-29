@@ -57,27 +57,37 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::view('/explore', 'products.explore')->name('explore');
     Route::view('/support', 'products.support')->name('support');
-    Route::view('/dashboard', 'dashboard')->name('dashboard');
+    Route::view('/dashboard', 'admin.user.dashboard')->name('dashboard');
 });
 
 // Admin Routes (Protected by 'admin' middleware)
-Route::middleware('admin')->group(function () {
-    // Admin Dashboard
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    // Admin Store Management
-    Route::view('/admin/store/index', 'admin.store.index')->name('manage.questions');
-    Route::get('/admin/store/create', [UserController::class, 'addStoreForm'])->name('store.create');
-    // User CRUD (Admin only)
-    Route::get('/admin/user/index', [UserController::class, 'loadAllUser'])->name('user_detail'); // Show all users
-    Route::get('/admin/user/index/create', [UserController::class, 'addUserForm'])->name('addUserForm'); // Create new user form
-    Route::post('/admin/user/index/create', [UserController::class, 'AddUser'])->name('user.create'); // Create new user
 
-    // Edit user routes
-    Route::get('/admin/user/index/edit/{id}', [UserController::class, 'editUserForm'])->name('editUserForm'); // Edit user form
-    Route::post('/admin/user/index/edit/{id}', [UserController::class, 'update'])->name('user.edit'); // Update user
 
-    // Delete user route
-    Route::post('/admin/user/index/delete/{id}', [UserController::class, 'deleteUser'])->name('deleteUser'); // Delete user
+Route::middleware(['auth', 'admin'])->group(function () {
+    // Admin Dashboard - Uncomment and use this route for the admin dashboard
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('dashboard');
+
+    // Manage Store (admin only)
+    Route::view('/admin/store/index', 'admin.store.index')->name('manage.questions'); // Admin view for managing stores/questions
+    Route::get('/admin/store/create', [UserController::class, 'addStoreForm'])->name('store.create'); // Create new store/resource form
+
+    // User Management Routes (Admin only)
+    Route::get('/admin/user/index', [UserController::class, 'loadAllUser'])->name('user_detail');  // Show all users
+    Route::get('/admin/user/create', [UserController::class, 'addUserForm'])->name('addUserForm'); // Show form to create new user
+    Route::post('/admin/user/create', [UserController::class, 'AddUser'])->name('user.create'); // Store new user
+
+    // Edit User
+    Route::get('/admin/user/edit/{id}', [UserController::class, 'editUserForm'])->name('editUserForm'); // Edit user form
+    Route::post('/admin/user/edit/{id}', [UserController::class, 'update'])->name('user.edit'); // Update user data
+
+    // Delete User
+    Route::post('/admin/user/delete/{id}', [UserController::class, 'deleteUser'])->name('deleteUser'); // Delete a user
 });
-// User Dashboard Routes
-Route::get('/user/dashboard', [UserController::class, 'index'])->name('user.dashboard'); // User Dashboard
+
+
+
+
+// User routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/user/dashboard', [UserController::class, 'index'])->name('user.dashboard');
+});

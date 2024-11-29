@@ -29,82 +29,87 @@
         <a href="{{ route('support') }}" class="nav-link navO text-lg font-semibold hover:text-green-700">Support</a>
       </div>
   
-      @auth
-      <div class="relative grid place-items-center" x-data="{ open: false }">
-        <div  class=" flex btn cursor-pointer">
-          
-          <h6 @click="open = !open" class="username hover:text-black  capitalize py-2 ">{{ auth()->user()->username }}</h6>
-          <i class="bx bx-menu toggleMenu" onclick="toggleMenu()"></i>
-        </div>
-        <div x-show="open" @click.outside="open = false" class="absolute top-14 px-4 py-5 right-0 overflow-hidden rounded-lg bg-slate-200 shadow-lg">
-          <p class="email mb-4 ">{{ auth()->user()->email }}</p>
-          <a href="{{ route('dashboard') }}" class="dashboard mb-8 hover:text-slate-400">Dashboard</a>
-          <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button class="block mt-4 w-full text-left hover:text-slate-400">Logout</button>
-          </form>
-        </div>
-       
-      </div>
-      @endauth
-      @guest
-<!-- Initial container with Alpine.js state management -->
-<div class="flex items-center gap-6" x-data="{ showRoleSelection: false, selectedRole: null }">
-    <!-- Sign Up Button: only visible if no role is selected -->
-    <button 
-        @click="showRoleSelection = true" 
-        class="nav-link text-lg font-semibold hover:text-green-600" 
-        x-show="!selectedRole && !showRoleSelection"
-    >
-        Sign Up
-    </button>
-    <div 
-        x-show="showRoleSelection" 
-        @click.away="showRoleSelection = false" 
-        class="absolute top-14 right-0 p-4 bg-white shadow-lg rounded-lg"
-    >
-        <h3 class="font-semibold mb-2">Select an option</h3>
-        <ul>
-            <li>
-                <a 
-                    href="#" 
-                    @click="selectedRole = 'admin'; showRoleSelection = false" 
-                    class="text-lg hover:text-green-600"
-                >
-                    Admin
-                </a>
-            </li>
-            <li>
-                <a 
-                    href="#" 
-                    @click="selectedRole = 'user'; showRoleSelection = false" 
-                    class="text-lg hover:text-green-600"
-                >
-                    User
-                </a>
-            </li>
-        </ul>
-    </div>
-    <!-- For User role -->
-    <div x-show="selectedRole === 'user'" class="flex items-center gap-6 registered" id="registerList">
-        <a href="{{ route('login') }}" class="nav-link text-lg font-semibold hover:text-green-600 register">Login</a>
-        <a href="{{ route('register') }}" class="nav-link text-lg font-semibold hover:text-green-600 rounded register">Sign Up</a>
-    </div>
 
-    <!-- For Admin role -->
-    <div x-show="selectedRole === 'admin'" class="flex items-center gap-6 registered" id="registerList">
-        <a href="{{ route('adminLogin') }}" class="nav-link text-lg font-semibold hover:text-green-600 register">Login</a>
-        <a href="{{ route('adminRegister') }}" class="nav-link text-lg font-semibold hover:text-green-600 rounded register">Sign Up</a>
-    </div>
 
+
+      <!-- Handle authenticated users (admin or user) -->
+@auth
+<div class="relative grid place-items-center" x-data="{ open: false }">
+  <div class="flex btn cursor-pointer">
+    <h6 @click="open = !open" class="username hover:text-black capitalize py-2 ">{{ auth()->user()->username }}</h6>
+    <i class="bx bx-menu toggleMenu" onclick="toggleMenu()"></i>
+  </div>
+  <div x-show="open" @click.outside="open = false" class="absolute top-14 px-4 py-5 right-0 overflow-hidden rounded-lg bg-slate-200 shadow-lg">
+    <p class="email mb-4 ">{{ auth()->user()->email }}</p>
+
+    <!-- Show link based on user role -->
+    @if(auth()->user()->role === 'admin')
+      <a href="{{ route('dashboard') }}" class="dashboard mb-8 hover:text-slate-400">Admin Dashboard</a>
+    @elseif(auth()->user()->role === 'user')
+      <a href="{{ route('user.dashboard') }}" class="dashboard mb-8 hover:text-slate-400">User Dashboard</a>
+    @endif
+
+    <form action="{{ route('logout') }}" method="POST">
+      @csrf
+      <button class="block mt-4 w-full text-left hover:text-slate-400">Logout</button>
+    </form>
+  </div>
 </div>
+@endauth
 
-<!-- Optional: Menu Toggle Icon -->
-<i class="bx bx-menu toggleMenu" onclick="toggleMenu()"></i>
-@endguest
+<!-- Handle guest users (not authenticated) -->
+@guest
+<div class="flex items-center gap-6" x-data="{ showRoleSelection: false, selectedRole: null }">
+  <!-- Sign Up Button: only visible if no role is selected -->
+  <button 
+    @click="showRoleSelection = true" 
+    class="nav-link text-lg font-semibold hover:text-green-600" 
+    x-show="!selectedRole && !showRoleSelection"
+  >
+    Sign Up
+  </button>
 
-      
-      
+  <div 
+    x-show="showRoleSelection" 
+    @click.away="showRoleSelection = false" 
+    class="absolute top-14 right-0 p-4 bg-white shadow-lg rounded-lg"
+  >
+    <h3 class="font-semibold mb-2">Select an option</h3>
+    <ul>
+      <li>
+        <a 
+          href="#" 
+          @click="selectedRole = 'admin'; showRoleSelection = false" 
+          class="text-lg hover:text-green-600"
+        >
+          Admin
+        </a>
+      </li>
+      <li>
+        <a 
+          href="#" 
+          @click="selectedRole = 'user'; showRoleSelection = false" 
+          class="text-lg hover:text-green-600"
+        >
+          User
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- For User role -->
+  <div x-show="selectedRole === 'user'" class="flex items-center gap-6 registered" id="registerList">
+    <a href="{{ route('login') }}" class="nav-link text-lg font-semibold hover:text-green-600 register">Login</a>
+    <a href="{{ route('register') }}" class="nav-link text-lg font-semibold hover:text-green-600 rounded register">Sign Up</a>
+  </div>
+
+  <!-- For Admin role -->
+  <div x-show="selectedRole === 'admin'" class="flex items-center gap-6 registered" id="registerList">
+    <a href="{{ route('adminLogin') }}" class="nav-link text-lg font-semibold hover:text-green-600 register">Login</a>
+    <a href="{{ route('adminRegister') }}" class="nav-link text-lg font-semibold hover:text-green-600 rounded register">Sign Up</a>
+  </div>
+</div>
+@endguest   
     </nav>
   </header>
   
