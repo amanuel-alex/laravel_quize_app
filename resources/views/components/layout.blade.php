@@ -24,7 +24,7 @@
         <a href="{{ route('about') }}" class="nav-link navO text-lg font-semibold hover:text-green-700">About</a>
         <a href="{{ route('explore') }}" class="nav-link navO text-lg font-semibold hover:text-green-700">Explore</a>
         <a href="{{ route('references') }}" class="nav-link navO text-lg font-semibold hover:text-green-700">References</a>
-        <a href="{{ route('quize') }}" class="nav-link navO text-lg font-semibold hover:text-green-700">Quize</a>
+        <a href="{{ route('quize') }}" class="nav-link navO text-lg font-semibold hover:text-green-700">Quiz</a>
         <a href="{{ route('blog') }}" class="nav-link navO text-lg font-semibold hover:text-green-700">Blog</a>
         <a href="{{ route('support') }}" class="nav-link navO text-lg font-semibold hover:text-green-700">Support</a>
       </div>
@@ -150,7 +150,7 @@
             <!-- About Us Section -->
             <div class="about-us">
                 <h3 class="text-lg font-semibold mb-4 text-white">About Us</h3>
-                <p class="text-md text-center border text-family px-4 sm:px-8 md:px-12 lg:px-16 rounded-lg ">
+                <p class="text-md text-center border sm:ml-8 md:px-12 lg:px-16 rounded-lg ">
                     Our mission is to create deliverable products that are not only functional but also intuitive and impactful. We specialize in developing mobile apps, web platforms, and AI-powered systems.
                 </p>
             </div>
@@ -203,5 +203,75 @@ function toggleMenu() {
 
 
    </script>
+   
+   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+   <script>
+       const nextButton = document.getElementById('next');
+       const previousButton = document.getElementById('previous');
+       const quizContainer = document.getElementById('quiz-container');
+       let currentPage = 1;  // Start with page 1
+
+       // Function to load questions from the Laravel API
+       function loadQuestions(page) {
+           // Make a GET request to the Laravel backend to get quiz questions
+           axios.get(`/quiz/questions?page=${page}`)
+               .then(response => {
+                   const questions = response.data;  // This is the JSON data
+
+                   // Clear any previous questions from the container
+                   quizContainer.innerHTML = ''; 
+
+                   // Loop through each question and display it
+                   questions.forEach((question, index) => {
+                       const questionElement = document.createElement('div');
+                       questionElement.classList.add('space-y-4');
+
+                       const questionText = document.createElement('p');
+                       questionText.classList.add('text-xl', 'font-semibold');
+                       questionText.textContent = `${index + 1}. ${question.question_text}`;
+                       questionElement.appendChild(questionText);
+
+                       // Loop through the options and create radio buttons
+                       ['option_a', 'option_b', 'option_c'].forEach(option => {
+                           const optionLabel = document.createElement('label');
+                           optionLabel.classList.add('block', 'ml-2');
+                           optionLabel.innerHTML = `
+                               <input type="radio" name="question-${question.id}" value="${question[option]}" class="mr-2">
+                               ${question[option]}
+                           `;
+                           questionElement.appendChild(optionLabel);
+                       });
+
+                       // Append the question to the quiz container
+                       quizContainer.appendChild(questionElement);
+                   });
+
+                   // Disable the "Previous" button if we're on the first page
+                   previousButton.disabled = page <= 1;
+
+                   // Disable the "Next" button if there are fewer than 3 questions (meaning it's the last page)
+                   nextButton.disabled = questions.length < 3;
+               })
+               .catch(error => {
+                   console.error("Error loading questions:", error);
+               });
+       }
+
+       // Event listener for the "Next" button
+       nextButton.addEventListener('click', () => {
+           currentPage++;
+           loadQuestions(currentPage);  // Load the next set of questions
+       });
+
+       // Event listener for the "Previous" button
+       previousButton.addEventListener('click', () => {
+           currentPage--;
+           loadQuestions(currentPage);  // Load the previous set of questions
+       });
+
+       // Load the first set of questions when the page loads
+       loadQuestions(currentPage);
+   </script>
+
 </body>
 </html>

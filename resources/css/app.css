@@ -86,7 +86,7 @@ p.border {
     border-radius: 0.8rem;
 }
 .about-us p.border {
-    border-top: 4px solid rgb(168, 177, 168);
+    border-top: 8px solid rgb(168, 177, 168);
     border-bottom: 4px solid rgb(169, 180, 169);
     border-radius: 0.8rem;
     color: chartreuse;
@@ -142,6 +142,14 @@ h2 {
 }
 
 @media (max-width: 880px) {
+    .about-us p.border {
+        border-top: 4px solid rgb(8, 233, 8);
+        border-bottom: 4px solid rgb(22, 247, 22);
+        border-radius: 0.8rem;
+        color: chartreuse;
+        margin: 1rem 1rem;
+        margin-right: 2rem;
+    }
     .toggleMenu {
         display: block;
         margin: 0 1rem;
@@ -236,4 +244,26 @@ h2 {
 .registered.open {
     max-height: fit-content;
     transition: max-height 0.3s ease-in-out;
+}
+@media (max-width: 750px) {
+    .about-us p.border {
+        border-top: 4px solid rgb(8, 233, 8);
+        border-bottom: 4px solid rgb(22, 247, 22);
+        border-radius: 0.8rem;
+        color: chartreuse;
+        margin: 1rem 1rem;
+        margin-right: 2rem;
+        width: 200%;
+    }
+}
+@media (max-width: 650px) {
+    .about-us p.border {
+        border-top: 4px solid rgb(8, 233, 8);
+        border-bottom: 4px solid rgb(22, 247, 22);
+        border-radius: 0.8rem;
+        color: chartreuse;
+        margin: 1rem;
+        margin-right: 2rem;
+        width: 100%;
+    }
 }

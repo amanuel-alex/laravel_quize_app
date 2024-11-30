@@ -19,19 +19,19 @@
           <!-- Team Member 1 -->
           <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
             <img src="https://via.placeholder.com/150" alt="Team Member 1" class="w-32 h-32 rounded-full mx-auto mb-4"/>
-            <h4 class="text-xl font-semibold text-center">John Doe</h4>
+            <h4 class="text-xl font-semibold text-center">Aman Alex</h4>
             <p class="text-center text-gray-600">Founder & CEO</p>
           </div>
           <!-- Team Member 2 -->
           <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
             <img src="https://via.placeholder.com/150" alt="Team Member 2" class="w-32 h-32 rounded-full mx-auto mb-4"/>
-            <h4 class="text-xl font-semibold text-center">Jane Smith</h4>
+            <h4 class="text-xl font-semibold text-center">Anan sarbesa </h4>
             <p class="text-center text-gray-600">Content Manager</p>
           </div>
           <!-- Team Member 3 -->
           <div class="bg-gray-50 p-6 rounded-lg shadow-lg">
             <img src="https://via.placeholder.com/150" alt="Team Member 3" class="w-32 h-32 rounded-full mx-auto mb-4"/>
-            <h4 class="text-xl font-semibold text-center">Alice Johnson</h4>
+            <h4 class="text-xl font-semibold text-center">Asde Asfawu</h4>
             <p class="text-center text-gray-600">Lead Writer</p>
           </div>
         </div>

@@ -5,7 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\QuizController;
 // Role Selection and Authentication Routes
 Route::get('/select-role', [AuthController::class, 'showRoleSelectionForm'])->name('role.selection');
 Route::get('/role/{role}/login', [AuthController::class, 'showLoginForm'])->name('role.login');
@@ -36,8 +36,15 @@ Route::middleware('web')->group(function () {
     Route::view('/about', 'products.about')->name('about');
     Route::view('/blog', 'products.blog')->name('blog');
     Route::view('/references', 'products.references')->name('references');
-    Route::view('/quize', 'products.quize')->name('quize');
+    // Route::view('/quize', [QuizController::class, 'getQuestions'])->name('quize');
+    // Route::view('/quize', [QuizController::class, 'saveQuestionsToJson'])->name('quize');
 
+    Route::get('/quize', [QuizController::class, 'showQuizPage'])->name('quize');
+
+    // Route to fetch questions from the JSON file
+    Route::get('/api/questions', [QuizController::class, 'getQuestions']);
+
+    Route::view('/support', 'products.support')->name('support');
     // Registration and Login routes
     Route::view('/register', 'auth.userAuth.register')->name('register');
     Route::post('/register', [AuthController::class, 'register']);
@@ -45,6 +52,9 @@ Route::middleware('web')->group(function () {
     Route::view('/login', 'auth.userAuth.login')->name('login');
     Route::post('/login', [AuthController::class, 'login']);
 });
+
+
+Route::get('/save-questions-to-json', [QuizController::class, 'saveQuestionsToJson']);
 
 // Admin Routes (Protected by 'auth' and 'admin' middleware)
 Route::middleware(['auth', 'admin'])->group(function () {
@@ -66,7 +76,7 @@ Route::middleware(['auth'])->group(function () {
         return view('user.dashboard');
     })->name('user.dashboard');
     Route::view('/explore', 'products.explore')->name('explore');
-    Route::view('/support', 'products.support')->name('support');
+
     Route::get('/admin-dashboard', function () {
         return view('admin.dashboard');
     })->name('admin.dashboard');
