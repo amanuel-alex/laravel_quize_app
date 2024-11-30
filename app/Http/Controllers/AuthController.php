@@ -14,90 +14,121 @@ use Laravel\Socialite\Facades\Socialite;
 class AuthController extends Controller
 {
 
-
-    public function adminregister(Request $request)
+    public function showRoleSelectionForm()
     {
-
-        // validate
-        $fields = $request->validate([
-
-            'username' => ['required', 'max:255', 'string', 'regex:/^[A-Za-z\s]+$/'],
-            'email' => ['required', 'max:255', 'email', 'unique:users'],
-            'password' => ['required', 'min:4', 'confirmed'],
-
-        ]);
-        // register
-        $user = User::create($fields);
-        // login
-        Auth::login($user);
-        // redirect
-        return redirect()->route('home');
+        return view('auth.role-selection');
     }
-    public function adminlogin(Request $request)
+
+    // Show login form for a specific role
+    public function showLoginForm($role)
     {
-        // Validate the incoming request data
+        return view('auth.login', compact('role'));
+    }
+
+    // Show register form for a specific role
+    public function showRegisterForm($role)
+    {
+        return view('auth.register', compact('role'));
+    }
+    // Admin Registration
+    public function adminRegister(Request $request)
+    {
         $fields = $request->validate([
-            'email' => ['required', 'max:255', 'email'],
+            'username' => ['required', 'max:255', 'string', 'regex:/^[A-Za-z\s]+$/'],
+            'email' => ['required', 'max:255', 'email', 'unique:users,email'],
+            'password' => ['required', 'min:4', 'confirmed'],
+        ]);
+
+        // Add 'admin' role to the fields
+        $fields['role'] = 'admin';
+
+        // Hash the password before storing
+        $fields['password'] = Hash::make($fields['password']);
+
+        // Create the admin user
+        $user = User::create($fields);
+
+        // Log the user in
+        Auth::login($user);
+
+        // Redirect to admin dashboard
+        return redirect()->route('admin.dashboard');
+    }
+
+    // Admin Login
+    public function adminLogin(Request $request)
+    {
+        $fields = $request->validate([
+            'email' => ['required', 'email', 'exists:users,email'],
             'password' => ['required'],
         ]);
 
-        // Attempt to authenticate the user
-        if (Auth::attempt($fields, $request->remember)) {
-            // Authentication successful, now check user role
+        // Attempt to log the user in
+        if (Auth::attempt($fields)) {
+            // Redirect to admin dashboard if the user is an admin
             if (Auth::user()->role === 'admin') {
-                // Redirect to admin dashboard if the user is an admin
                 return redirect()->route('admin.dashboard');
             }
 
-            // Redirect to user dashboard if the user is not an admin
-            return redirect()->route('dashboard');
+            // If the user is not an admin, redirect to the user dashboard
+            return redirect()->route('user.dashboard');
         }
 
-        // If authentication fails, redirect back with an error message
+        // If authentication fails
         return back()->withErrors(['failed' => 'The provided credentials do not match our records.']);
     }
-    // register 
+
+    // User Registration
     public function register(Request $request)
     {
-
-        // validate
         $fields = $request->validate([
-
             'username' => ['required', 'max:255', 'string', 'regex:/^[A-Za-z\s]+$/'],
-            'email' => ['required', 'max:255', 'email', 'unique:users'],
+            'email' => ['required', 'max:255', 'email', 'unique:users,email'],
             'password' => ['required', 'min:4', 'confirmed'],
-
         ]);
-        // register
+
+        // Set role to 'user' for regular registration
+        $fields['role'] = 'user';
+
+        // Hash the password
+        $fields['password'] = Hash::make($fields['password']);
+
+        // Create the user
         $user = User::create($fields);
-        // login
+
+        // Log the user in
         Auth::login($user);
-        // redirect
-        return redirect()->route('home');
+
+        // Redirect to user dashboard
+        return redirect()->route('user.dashboard');
     }
+
+    // User Login
     public function login(Request $request)
     {
-        // Validate the incoming request data
         $fields = $request->validate([
             'email' => ['required', 'max:255', 'email'],
             'password' => ['required'],
         ]);
 
         // Attempt to authenticate the user
-        if (Auth::attempt($fields, $request->remember)) {
-            // Authentication successful, now check user role
-            if (Auth::user()->role === 'user') {
-                // Redirect to admin dashboard if the user is an admin
-                return redirect()->route('admin.user.dashboard');
+        if (Auth::attempt($fields)) {
+            // Check the role of the user after login
+            if (Auth::user()->role === 'admin') {
+                return redirect()->route('admin.dashboard');
             }
 
-            // Redirect to user dashboard if the user is not an admin
-            return redirect()->route('admin.user.dashboard');
+            // Redirect to user dashboard for regular users
+            return redirect()->route('user.dashboard');
         }
 
-        // If authentication fails, redirect back with an error message
+        // If authentication fails
         return back()->withErrors(['failed' => 'The provided credentials do not match our records.']);
     }
+
+    // Logout Method
+
+
 
 
     // login option with facebook

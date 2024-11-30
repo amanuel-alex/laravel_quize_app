@@ -14,7 +14,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-slate-300 text-slate-900 ">
-  <header class="bg-orange-50 shadow-lg fixed left-0 right-0 top-0 scrolled py-2">
+  <header class="bg-orange-50 shadow-lg fixed left-0 right-0 top-0 scrolled py-4">
     <nav class="flex justify-between items-center w-[92%] mx-auto  ">
       {{-- <img src="{{ asset('img/logo4.png') }}" alt="logo" class="w-22 h-10"> --}}
       <a href="{{ route('home') }}" class="nav-link text-lg font-semibold">AmanView</a>
@@ -42,12 +42,12 @@
   <div x-show="open" @click.outside="open = false" class="absolute top-14 px-4 py-5 right-0 overflow-hidden rounded-lg bg-slate-200 shadow-lg">
     <p class="email mb-4 ">{{ auth()->user()->email }}</p>
 
-    <!-- Show link based on user role -->
-    @if(auth()->user()->role === 'admin')
-      <a href="{{ route('dashboard') }}" class="dashboard mb-8 hover:text-slate-400">Admin Dashboard</a>
-    @elseif(auth()->user()->role === 'user')
-      <a href="{{ route('user.dashboard') }}" class="dashboard mb-8 hover:text-slate-400">User Dashboard</a>
-    @endif
+    @if(auth()->user()->role === 'user')
+    <a href="{{ route('user.dashboard') }}" class="dashboard mb-8 hover:text-slate-400">User Dashboard</a>
+   
+@elseif(auth()->user()->role === 'admin')
+<a href="{{ route('admin.dashboard') }}" class="dashboard mb-8 hover:text-slate-400">Admin Dashboard</a>
+@endif
 
     <form action="{{ route('logout') }}" method="POST">
       @csrf

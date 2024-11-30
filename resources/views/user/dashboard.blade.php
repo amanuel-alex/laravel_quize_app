@@ -3,8 +3,9 @@
     
     
     <div class="container ">
-        <h1 class="capitalize">Welcome, user {{ Auth::user()->username }}!</h1>
-        <p>Manage questions, users, and more from this dashboard.</p>
+        <h1 ><span class="capitalize" >Welcome,{{ Auth::user()->username }}!</span> Thank you for visiting us</h1>
+       
+        <p>see more questions, quize status, and test your self </p>
         
 </div>
 </x-layout>
