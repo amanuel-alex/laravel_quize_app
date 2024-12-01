@@ -14,8 +14,8 @@
         <div class="space-y-6">
             <!-- FAQ Item 1 -->
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h3 class="text-xl font-semibold mb-2">How do I sign up for My Crypto App?</h3>
-                <p class="text-gray-500">You can sign up by clicking the "Sign Up" button on the homepage. After entering your details, you'll receive a confirmation email to activate your account.</p>
+                <h3 class="text-xl font-semibold mb-2">How do I sign up for My amanView web?</h3>
+                <p class="text-gray-500">You can sign up by clicking the "Sign Up" button on the homepage or right corner of header section. After entering your details, you'll receive a confirmation email to activate your account.</p>
             </div>
             <!-- FAQ Item 2 -->
             <div class="bg-white p-6 rounded-lg shadow-lg">
@@ -24,8 +24,8 @@
             </div>
             <!-- FAQ Item 3 -->
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h3 class="text-xl font-semibold mb-2">How do I deposit cryptocurrency into my wallet?</h3>
-                <p class="text-gray-500">Go to your wallet section, select "Deposit", and choose the cryptocurrency you'd like to deposit. Follow the instructions to generate a deposit address.</p>
+                <h3 class="text-xl font-semibold mb-2">How do I see quiz status ?</h3>
+                <p class="text-gray-500">Go to your signup section at right corner, select from the drop down "user dashboard", and you will get your quiz status</p>
             </div>
             <!-- FAQ Item 4 -->
             <div class="bg-white p-6 rounded-lg shadow-lg">
@@ -34,8 +34,8 @@
             </div>
             <!-- FAQ Item 5 -->
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <h3 class="text-xl font-semibold mb-2">How do I withdraw my cryptocurrency?</h3>
-                <p class="text-gray-500">To withdraw, go to your wallet section, click "Withdraw", and enter the destination wallet address. Follow the prompts to complete your withdrawal.</p>
+                <h3 class="text-xl font-semibold mb-2">How do I become expert just by visiting this web</h3>
+                <p class="text-gray-500">To be experts, go to references and quiz section, click one of them and you will find related concepts. Follow us for more </p>
             </div>
         </div>
     </section>

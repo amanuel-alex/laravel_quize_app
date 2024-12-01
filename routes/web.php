@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReferenceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PostController;
@@ -35,7 +36,13 @@ Route::middleware('web')->group(function () {
     Route::view('/', 'home')->name('home');
     Route::view('/about', 'products.about')->name('about');
     Route::view('/blog', 'products.blog')->name('blog');
+
+    Route::get('/quiz', [ReferenceController::class, 'showReferecesPage']);
     Route::view('/references', 'products.references')->name('references');
+    // API route to fetch references (questions)
+    Route::get('/api/references', [ReferenceController::class, 'getReferences']);
+    // Route::view('/references', 'products.references')->name('references');
+    // Route::get('/references/index', [ReferenceController::class, 'index'])->name('references.index');
     // Route::view('/quize', [QuizController::class, 'getQuestions'])->name('quize');
     // Route::view('/quize', [QuizController::class, 'saveQuestionsToJson'])->name('quize');
 

@@ -1,7 +1,7 @@
 <x-layout>
  <!-- resources/views/products/quize.blade.php -->
-<div class="max-w-2xl mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
-  <div id="quiz-container" class="space-y-6">
+<div class="max-w-8xl  p-6 bg-white rounded-lg shadow-md mt-10 m-auto">
+  <div id="quiz-container" class="space-y-8 mx-2">
       <!-- Quiz Questions will be dynamically inserted here -->
   </div>
 
