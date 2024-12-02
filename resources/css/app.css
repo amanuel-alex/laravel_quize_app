@@ -140,6 +140,11 @@ h2 {
     display: none;
     cursor: pointer;
 }
+.nextprev {
+    right: 2rem;
+    bottom: 1rem;
+    margin-top: 5rem;
+}
 
 @media (max-width: 880px) {
     .about-us p.border {

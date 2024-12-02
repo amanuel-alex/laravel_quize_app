@@ -39,17 +39,18 @@ Route::middleware('web')->group(function () {
 
     Route::get('/quiz', [ReferenceController::class, 'showReferecesPage']);
     Route::view('/references', 'products.references')->name('references');
-    // API route to fetch references (questions)
+    // API route to fetch references 
     Route::get('/api/references', [ReferenceController::class, 'getReferences']);
-    // Route::view('/references', 'products.references')->name('references');
-    // Route::get('/references/index', [ReferenceController::class, 'index'])->name('references.index');
-    // Route::view('/quize', [QuizController::class, 'getQuestions'])->name('quize');
-    // Route::view('/quize', [QuizController::class, 'saveQuestionsToJson'])->name('quize');
 
+
+    // Route::get('/quize', [QuizController::class, 'showQuizPage'])->name('quize');
+
+    // // Route to fetch questions from the JSON file
+    // Route::get('/api/questions', [QuizController::class, 'getQuestions']);
     Route::get('/quize', [QuizController::class, 'showQuizPage'])->name('quize');
+    Route::get('/api/questions', [QuizController::class, 'getQuestions']); // To fetch quiz questions via API
+    Route::post('/quize/submit', [QuizController::class, 'submitQuiz'])->name('quiz.submit');
 
-    // Route to fetch questions from the JSON file
-    Route::get('/api/questions', [QuizController::class, 'getQuestions']);
 
     Route::view('/support', 'products.support')->name('support');
     // Registration and Login routes

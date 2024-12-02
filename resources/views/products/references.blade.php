@@ -2,14 +2,15 @@
    <div class="max-w-5xl mx-auto py-12 px-4">
        
        
-       <div id="references-container" class="rounded-md  space-y-8 bg-slate-200 text-slate-100" >
+       <div id="references-container" class="rounded-md  space-y-8 bg-slate-200 text-slate-100 " >
            <!--  dynamically inserted -->
        </div>
 
-       <div class="flex justify-around mt-16 ">
-           <button id="previous" class=" hover:bg-slate-400 bg-blue-500 text-white px-4 py-2 rounded-lg" disabled>Previous</button>
-           <button id="next" class="hover:bg-slate-400 bg-blue-500 text-white px-4 py-2  rounded-lg">Next</button>
+       <div class="flex nextprev   justify-around">
+        <button id="previous" class="hover:bg-slate-400 bg-blue-500 text-white px-4 py-2 rounded-lg" disabled>&lArr;</button>
+        <button id="next" class="hover:bg-slate-400 bg-blue-500 text-white px-4 py-2 rounded-lg">&rArr;</button>
        </div>
+    
    </div>
 
    <script>
