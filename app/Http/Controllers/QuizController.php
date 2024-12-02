@@ -35,35 +35,35 @@ class QuizController extends Controller
     // Method to handle quiz submission and calculate score
     public function submitQuiz(Request $request)
     {
-        // Decode the answers from the hidden input field (which is a JSON string)
         $userAnswers = json_decode($request->input('answers'), true);
-
-        // Get the questions from the JSON file
         $questions = json_decode(file_get_contents(storage_path('app/public/questions.json')), true);
 
         $score = 0;
 
-        // Check if the user has answered all questions
+        // Ensure all questions are answered
         if (count($userAnswers) !== count($questions)) {
-            return back()->withErrors('Please answer all questions.');
+            return response()->json([
+                'success' => false,
+                'message' => 'Please answer all questions.',
+            ], 400);
         }
 
+        // Check answers
         foreach ($questions as $index => $question) {
-            // Check if the answer exists for this question
-            if (!isset($userAnswers[$index])) {
-                return back()->withErrors('Some questions were not answered.');
-            }
-
-            // Check if the answer is correct
-            $correctAnswer = $question['correct_option'];  // The correct option in the JSON
-            $userAnswer = $userAnswers[$index];
-
-            if ($userAnswer === $correctAnswer) {
+            $correctAnswer = $question['correct_option'];
+            if ($userAnswers[$index] === $correctAnswer) {
                 $score++;
             }
         }
 
-        // Redirect the user to the dashboard with their score
-        return redirect()->route('dashboard')->with('score', $score);
+        // Store the score in session
+        session(['score' => $score]);
+
+        // Return success response
+        return response()->json([
+            'success' => true,
+            'message' => 'Quiz submitted successfully!',
+            'score' => $score,
+        ]);
     }
 }
